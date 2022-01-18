@@ -31,7 +31,7 @@ audioFolder.forEach(folder => {
       console.error('Error:', err);
       console.error('ffmpeg stderr:', stderr);
     })
-    .on('end', output => {
-      console.error('Audio created in:', output);
+    .on('end', () => {
+      console.error('Audio created in:', outputPath + '\\' + folder + '.mp3');
     })
 });
