@@ -24,14 +24,14 @@ audioFolder.forEach(folder => {
 
   audioconcat(songs)
     .concat(outputPath + '\\' + folder + '.mp3')
-    .on('start', function (command) {
+    .on('start', command => {
       console.log('ffmpeg process started:', command);
     })
-    .on('error', function (err, stdout, stderr) {
+    .on('error', (err, stdout, stderr) => {
       console.error('Error:', err);
       console.error('ffmpeg stderr:', stderr);
     })
-    .on('end', function (output) {
+    .on('end', output => {
       console.error('Audio created in:', output);
     })
 });
