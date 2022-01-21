@@ -15,8 +15,9 @@ audioFolder.forEach(folder => {
   wavFolder = fs.readdirSync(wavPath);
 
   wavFolder.forEach((wav, i) => {
-    let child = execSync(
-      'ffmpeg.exe -i "' + wavPath + '\\' + wav + '" -acodec libmp3lame -b:a 320k "' + wavPath + '\\' + (i + 1) + '.mp3"',
+    execSync(
+      'ffmpeg.exe -i "' + wavPath + '\\' + wav + '" ' +
+      '-acodec libmp3lame -b:a 320k "' + wavPath + '\\' + (i + 1) + '.mp3"'
     );
 
     songs.push(wavPath + '\\' + (i + 1) + '.mp3');
@@ -25,7 +26,7 @@ audioFolder.forEach(folder => {
   audioconcat(songs)
     .concat(outputPath + '\\' + folder + '.mp3')
     .on('start', command => {
-      console.log('ffmpeg process started:', command);
+      console.log('ffmpeg process started:', command)
     })
     .on('error', (err, stdout, stderr) => {
       console.error('Error:', err);
